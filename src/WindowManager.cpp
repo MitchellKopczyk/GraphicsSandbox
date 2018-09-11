@@ -1,4 +1,4 @@
-#include "WindowManager.h"
+#include "../Inc/WindowManager.h"
 
 namespace
 {

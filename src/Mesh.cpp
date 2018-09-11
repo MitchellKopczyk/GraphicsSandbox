@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "../Inc/Mesh.h"
 
 Mesh::Mesh(Model& model, aiMesh& mesh, ID3D11Device* Device)
 {
@@ -43,7 +43,7 @@ Mesh::Mesh(Model& model, aiMesh& mesh, ID3D11Device* Device)
 		TextureCoords = true;
 		aiVector3D* aiTextureCoordinates = mesh.mTextureCoords[0];
 		for (unsigned int i = 0; i < mesh.mNumVertices; i++)
-		{		
+		{
 			Textures.push_back(DirectX::XMFLOAT3(reinterpret_cast<const float*>(&aiTextureCoordinates[i])));
 		}
 	}
@@ -66,21 +66,21 @@ Mesh::Mesh(Model& model, aiMesh& mesh, ID3D11Device* Device)
 	TempVertexStorgae.reserve(mesh.mNumVertices);
 	if (TextureCoords)
 	{
-		for (int i = 0; i < Vertices.size(); i++)
+		for (unsigned int i = 0; i < Vertices.size(); i++)
 		{
 			TempVertexStorgae.push_back(Vertex(Vertices.at(i).x, Vertices.at(i).y, Vertices.at(i).z,
-				Textures.at(i).x, Textures.at(i).y, Normals.at(i).x, Normals.at(i).y,Normals.at(i).z));
+				Textures.at(i).x, Textures.at(i).y, Normals.at(i).x, Normals.at(i).y, Normals.at(i).z));
 		}
 	}
 	else
 	{
-		for (int i = 0; i < Vertices.size(); i++)
+		for (unsigned int i = 0; i < Vertices.size(); i++)
 		{
 			TempVertexStorgae.push_back(Vertex(Vertices.at(i).x, Vertices.at(i).y, Vertices.at(i).z, 0.0f, 0.0f, Normals.at(i).x,
 				Normals.at(i).y, Normals.at(i).z));
 		}
 	}
-	
+
 	Material = model.Materials.at(mesh.mMaterialIndex);
 
 	D3D11_BUFFER_DESC vertexBufferDesc;

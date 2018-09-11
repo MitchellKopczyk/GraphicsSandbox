@@ -1,4 +1,4 @@
-#include "Mouse.h"
+#include "../Inc/Mouse.h"
 
 Mouse::Mouse()
 {

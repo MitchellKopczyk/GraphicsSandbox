@@ -1,4 +1,4 @@
-#include "GraphicsManager.h"
+#include "../Inc/GraphicsManager.h"
 
 GraphicsManager::GraphicsManager(HINSTANCE hInstance) : WindowManager(hInstance)
 {
@@ -77,7 +77,7 @@ void GraphicsManager::Initialize()
 	Viewport.Height = static_cast<float>(WindowHeight);
 	Viewport.MinDepth = 0.0f;
 	Viewport.MaxDepth = 1.0f;
-	
+
 	ImmediateContext->RSSetViewports(1, &Viewport);
 	ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }

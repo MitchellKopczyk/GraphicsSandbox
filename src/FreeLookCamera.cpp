@@ -1,6 +1,6 @@
-#include "FreeLookCamera.h"
+#include "../Inc/FreeLookCamera.h"
 
-FreeLookCamera::FreeLookCamera(int height, int width )
+FreeLookCamera::FreeLookCamera(int height, int width)
 {
 	float x = float(height);
 	float y = float(width);

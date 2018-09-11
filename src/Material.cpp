@@ -1,4 +1,4 @@
-#include "Material.h"
+#include "../Inc/Material.h"
 
 Material::Material(Model& model, aiMaterial* material, ID3D11Device* Device, ID3D11DeviceContext* DeviceContext)
 {
@@ -52,7 +52,7 @@ Material::Material(Model& model, aiMaterial* material, ID3D11Device* Device, ID3
 		Scalars.insert(std::pair<MaterialScalars, float>(MaterialScalars::Opacity, scalar));
 	}
 
-	std::string preparedString = "";
+	std::string preparedString = "./Models/windmill_obj/";
 	std::map<TextureMapTypes, std::string>::iterator it = this->TextureMapFiles.find(TextureMapTypes::DiffuseMap);
 	if (it != this->TextureMapFiles.end())
 	{
@@ -61,9 +61,6 @@ Material::Material(Model& model, aiMaterial* material, ID3D11Device* Device, ID3
 		preparedString += it->second;
 		std::wstring widestr = std::wstring(preparedString.begin(), preparedString.end());
 		const wchar_t* widecstr = widestr.c_str();
-
-		MessageBox(0, widecstr, 0, 0);
-
 		HRESULT status = DirectX::CreateWICTextureFromFile(Device, widecstr, &Resource, &ShaderResourceView);
 		TextureBuffers.insert(std::pair<TextureMapTypes, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>>(TextureMapTypes::DiffuseMap, ShaderResourceView));
 		HR(status);

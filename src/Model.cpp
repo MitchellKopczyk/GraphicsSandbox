@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "../Inc/Model.h"
 
 Model::Model()
 {
@@ -31,7 +31,9 @@ bool Model::Load(std::string fileName, ID3D11Device* Device, ID3D11DeviceContext
 
 	const aiScene* scene = importer.ReadFile(fileName, flags);
 	if (scene == nullptr)
+	{
 		return false;
+	}
 
 	if (scene->HasMaterials())
 	{
@@ -47,7 +49,7 @@ bool Model::Load(std::string fileName, ID3D11Device* Device, ID3D11DeviceContext
 		for (unsigned int i = 0; i < NumberOfMeshes; i++)
 		{
 			Meshes.push_back(new Mesh(*this, *(scene->mMeshes[i]), Device));
-			
+
 		}
 	}
 	return true;
