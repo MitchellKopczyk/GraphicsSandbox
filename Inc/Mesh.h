@@ -18,6 +18,7 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D11Buffer> VertexBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> IndexBuffer;
+	void BuildBuffers(ID3D11Device*, std::vector<Vertex>&, std::vector<UINT>&);
 
 	UINT IndexDrawCount;
 	bool TextureCoords = false;

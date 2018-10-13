@@ -14,6 +14,7 @@ public:
 	DirectX::XMMATRIX GetView() const;
 	DirectX::XMMATRIX GetProjection() const;
 	DirectX::XMMATRIX GetViewProjection() const;
+	DirectX::XMVECTOR GetPositon() const;
 
 	//Rotation around the y-axis
 	float Yaw = 0.0f;

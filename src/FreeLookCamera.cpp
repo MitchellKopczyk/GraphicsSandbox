@@ -64,3 +64,8 @@ DirectX::XMMATRIX FreeLookCamera::GetViewProjection() const
 {
 	return XMMatrixMultiply(GetView(), GetProjection());
 }
+
+DirectX::XMVECTOR FreeLookCamera::GetPositon() const
+{
+	return Position;
+}

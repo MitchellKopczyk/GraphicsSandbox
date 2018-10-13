@@ -34,9 +34,7 @@ void Mouse::GetState()
 		if (FAILED(Device->GetDeviceState(sizeof(CurrentState), &CurrentState)))
 		{
 			if (SUCCEEDED(Device->Acquire()))
-			{
 				HR(Device->GetDeviceState(sizeof(CurrentState), &CurrentState));
-			}
 		}
 	}
 }
@@ -44,9 +42,7 @@ void Mouse::GetState()
 bool Mouse::ChangedPosition()
 {
 	if ((CurrentState.lX != LastState.lX) || (CurrentState.lY != LastState.lY))
-	{
 		return true;
-	}
 }
 
 LONG Mouse::GetCurrentStateX() const

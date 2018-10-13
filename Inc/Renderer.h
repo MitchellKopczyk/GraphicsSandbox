@@ -8,6 +8,7 @@
 #include "VertexLayout.h"
 #include "ShaderConstants.h"
 #include "Model.h"
+#include "Sphere.h"
 
 class WaveFrontModel;
 

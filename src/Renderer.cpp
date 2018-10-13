@@ -7,9 +7,7 @@ void Renderer::Initalize()
 	BuildShaderConstants();
 	BuildInputLayout();
 	if (!ObjModelUno->Load("./Models/windmill_obj/windmill.obj", Device.Get(), ImmediateContext.Get()))
-	{
 		MessageBox(0, L"Failed to Load Model", 0, 0);
-	}
 	UserKeyboard->Initialize(WinInstance, WindowHandle);
 	UserMouse->Initialize(WinInstance, WindowHandle);
 }
@@ -54,22 +52,18 @@ void Renderer::BuildShaderConstants()
 void Renderer::Update()
 {
 	HandleUserInput();
-
 	ImmediateContext->VSSetShader(VertexShader.Get(), 0, 0);
 	ImmediateContext->PSSetShader(PixelShader.Get(), 0, 0);
-
 	DirectX::XMMATRIX World = DirectX::XMMatrixIdentity();
 	DirectX::XMMATRIX WVP = World * PrimaryCamera->GetViewProjection();
 	cbPerObj.WVP = DirectX::XMMatrixTranspose(WVP);
 	ImmediateContext->UpdateSubresource(cbPerObjectBuffer.Get(), 0, NULL, &cbPerObj, 0, 0);
 	ImmediateContext->VSSetConstantBuffers(0, 1, cbPerObjectBuffer.GetAddressOf());
-
 }
 
 void Renderer::Draw()
 {
-
-	float Black[4] = { 0.0f, 0.2f, 0.4f, 1.0f };
+	float Black[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	ImmediateContext->ClearRenderTargetView(RenderTargetView.Get(), Black);
 	ImmediateContext->ClearDepthStencilView(DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	ObjModelUno->Draw(ImmediateContext.Get());
@@ -78,7 +72,7 @@ void Renderer::Draw()
 
 void Renderer::HandleUserInput()
 {
-	const float WASDSpeed = .2f;
+	const float WASDSpeed = .1f;
 	UserKeyboard->GetState();
 	UserMouse->GetState();
 
@@ -97,6 +91,7 @@ void Renderer::HandleUserInput()
 		wfdesc.CullMode = D3D11_CULL_NONE;
 		Device->CreateRasterizerState(&wfdesc, &WireFrame);
 		ImmediateContext->RSSetState(WireFrame.Get());
+		MessageBox(0, L"WireFrame Enabled", 0, 0);
 	}
 
 	if (UserKeyboard->KeyDown(DIK_M))
@@ -106,6 +101,7 @@ void Renderer::HandleUserInput()
 		wfdesc.CullMode = D3D11_CULL_NONE;
 		Device->CreateRasterizerState(&wfdesc, &WireFrame);
 		ImmediateContext->RSSetState(WireFrame.Get());
+		MessageBox(0, L"WireFrame Disabled", 0, 0);
 	}
 
 	if (UserKeyboard->KeyDown(DIK_W))

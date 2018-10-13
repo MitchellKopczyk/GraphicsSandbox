@@ -7,39 +7,28 @@ Material::Material(Model& model, aiMaterial* material, ID3D11Device* Device, ID3
 	float scalar;
 
 	if (AI_SUCCESS == material->Get(AI_MATKEY_NAME, StringBuffer))
-	{
 		Name = StringBuffer.C_Str();
-	}
 
 	if (AI_SUCCESS == aiGetMaterialTexture(material, aiTextureType_DIFFUSE, 0, &StringBuffer))
-	{
 		TextureMapFiles.insert(std::pair<TextureMapTypes, std::string>(TextureMapTypes::DiffuseMap, StringBuffer.C_Str()));
-	}
 
 	if (AI_SUCCESS == aiGetMaterialTexture(material, aiTextureType_AMBIENT, 0, &StringBuffer))
-	{
 		TextureMapFiles.insert(std::pair<TextureMapTypes, std::string>(TextureMapTypes::AmbientMap, StringBuffer.C_Str()));
-	}
 
 	if (AI_SUCCESS == aiGetMaterialTexture(material, aiTextureType_SPECULAR, 0, &StringBuffer))
-	{
 		TextureMapFiles.insert(std::pair<TextureMapTypes, std::string>(TextureMapTypes::SpecularMap, StringBuffer.C_Str()));
-	}
 
 	if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, color))
-	{
 		MaterialCompoents.insert(std::pair<MaterialColors, DirectX::XMFLOAT4>(MaterialColors::Diffuse, DirectX::XMFLOAT4(reinterpret_cast<const float*>(&color))));
-	}
 
 	if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_SPECULAR, color))
-	{
 		MaterialCompoents.insert(std::pair<MaterialColors, DirectX::XMFLOAT4>(MaterialColors::Specular, DirectX::XMFLOAT4(reinterpret_cast<const float*>(&color))));
-	}
 
 	if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_AMBIENT, color))
-	{
 		MaterialCompoents.insert(std::pair<MaterialColors, DirectX::XMFLOAT4>(MaterialColors::Ambient, DirectX::XMFLOAT4(reinterpret_cast<const float*>(&color))));
-	}
+
+	if (AI_SUCCESS == material->Get(AI_MATKEY_OPACITY, scalar))
+		Scalars.insert(std::pair<MaterialScalars, float>(MaterialScalars::Opacity, scalar));
 
 	if (AI_SUCCESS == material->Get(AI_MATKEY_SHININESS, scalar))
 	{
@@ -47,11 +36,7 @@ Material::Material(Model& model, aiMaterial* material, ID3D11Device* Device, ID3
 		Scalars.insert(std::pair<MaterialScalars, float>(MaterialScalars::Shininess, scalar));
 	}
 
-	if (AI_SUCCESS == material->Get(AI_MATKEY_OPACITY, scalar))
-	{
-		Scalars.insert(std::pair<MaterialScalars, float>(MaterialScalars::Opacity, scalar));
-	}
-
+	//Needs to be moved to own function
 	std::string preparedString = "./Models/windmill_obj/";
 	std::map<TextureMapTypes, std::string>::iterator it = this->TextureMapFiles.find(TextureMapTypes::DiffuseMap);
 	if (it != this->TextureMapFiles.end())
@@ -61,9 +46,8 @@ Material::Material(Model& model, aiMaterial* material, ID3D11Device* Device, ID3
 		preparedString += it->second;
 		std::wstring widestr = std::wstring(preparedString.begin(), preparedString.end());
 		const wchar_t* widecstr = widestr.c_str();
-		HRESULT status = DirectX::CreateWICTextureFromFile(Device, widecstr, &Resource, &ShaderResourceView);
+		HR(DirectX::CreateWICTextureFromFile(Device, widecstr, &Resource, &ShaderResourceView));
 		TextureBuffers.insert(std::pair<TextureMapTypes, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>>(TextureMapTypes::DiffuseMap, ShaderResourceView));
-		HR(status);
 	}
 
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> SamplerState;

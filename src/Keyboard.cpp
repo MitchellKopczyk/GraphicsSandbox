@@ -34,9 +34,7 @@ void Keyboard::GetState()
 		if (FAILED(Device->GetDeviceState(sizeof(CurrentKey), (LPVOID)CurrentKey)))
 		{
 			if (SUCCEEDED(Device->Acquire()))
-			{
 				HR(Device->GetDeviceState(sizeof(CurrentKey), (LPVOID)CurrentKey));
-			}
 		}
 	}
 }
