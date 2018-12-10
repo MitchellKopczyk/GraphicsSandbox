@@ -3,11 +3,11 @@ Welcome friends, this is a independent project to learn and understand 3D comput
 Get started by downloading the SDK below!<br>
 https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk
 
-<img height="435" width="900" src="https://raw.githubusercontent.com/MitchellKopczyk/GraphicsSandbox/master/samples/TestWireFrameRender.png">
+<img height="435" width="900" src="https://raw.githubusercontent.com/MitchellKopczyk/GraphicsSandbox/master/samples/TestTextureRender2.png">
 <br>
 <img height="435" width="900" src="https://raw.githubusercontent.com/MitchellKopczyk/GraphicsSandbox/master/samples/Windmill.png">
 <br>
-<img height="435" width="900" src="https://raw.githubusercontent.com/MitchellKopczyk/GraphicsSandbox/master/samples/TestTextureRender2.png">
+<img height="435" width="900" src="https://raw.githubusercontent.com/MitchellKopczyk/GraphicsSandbox/master/samples/TestWireFrameRender.png">
 
 
 Assimp Including and Linking via Visual Stuido
