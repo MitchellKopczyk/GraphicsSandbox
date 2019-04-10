@@ -1,5 +1,5 @@
 # GraphicsSandbox
-Welcome friends, this is a independent project to learn and understand 3D computer graphics. My objective is to intialize the graphics pipeline using the DirectX API and program shaders using HLSL. I will be implementing render states, texture mappings, lighting, model loading, user input, transforamtions, vectors, and a series of operations performed on vertices, primitives, and fragments. Allowing me to have a greater understanding of how rasterized graphics work.
+A DirectX project to render models, simulate lighting and much more.
 Get started by downloading the SDK below!<br>
 https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk
 
